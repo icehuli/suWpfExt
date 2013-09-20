@@ -36,18 +36,6 @@ namespace suWpfUI
         {
             this.Closing += MainWindow_Closing;
             InitializeComponent();
-
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml("<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
-                        "<People>" +
-                          "<Person FirstName=\"Ringo\" LastName=\"Starr\" Age=\"72\">" +
-                            "<FavoriteColors />" +
-                          "</Person>" +
-                        "</People>");
-
-            XmlDataProvider selection = FindResource("selection") as XmlDataProvider;
-            selection.Document = doc;
-            //dictionary_treeviewer.InvalidateVisual();
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -60,7 +48,6 @@ namespace suWpfUI
         {
             XmlDataProvider selection = FindResource("selection") as XmlDataProvider;
             selection.Document = xml;
-            //dictionary_treeviewer.InvalidateVisual();
         }
     }
 }
