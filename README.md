@@ -1,25 +1,25 @@
-suWpfExt
+# suWpfExt
 ========
 
 a SketchUp Ruby extension using WPF(c#)
 
 
-There are three Visual Studio projects, [suWpfExt], [suWpfUI], [suExtMainWrapper] and one ruby project [suRubyFiles]. 
+There are three Visual Studio projects, *suWpfExt*, *suWpfUI*, *suExtMainWrapper* and one ruby project *suRubyFiles*. 
 You will get three dlls compiled by Visual Studio:
     
     suWpfExt->myExtMain.dll
     suWpfUI->suWpfUI.dll
     suExtMainWrapper->suExtMainWrapper.dll.
 
-The files under [suRubyFiles] should be copied into SketchUp's Plugins folder, e.g.
+The files under *suRubyFiles* should be copied into SketchUp's Plugins folder, e.g.
 
     C:\Program Files (x86)\SketchUp\SketchUp 2013\Plugins
 
-[myExtMain.dll] should be copied into the extesion folder under Plugins folder, e.g.
+*myExtMain.dll* should be copied into the extesion folder under Plugins folder, e.g.
 
     C:\Program Files (x86)\SketchUp\SketchUp 2013\Plugins\su_myWpfExt
 
-[suWpfUI.dll] and [suExtMainWrapper.dll] should be copied into the SketchUp folder, e.g. 
+*suWpfUI.dll* and *suExtMainWrapper.dll* should be copied into the SketchUp folder, e.g. 
     
     C:\Program Files (x86)\SketchUp\SketchUp 2013
   
