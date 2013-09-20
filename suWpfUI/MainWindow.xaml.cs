@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Xml;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+
+
+using System.Windows.Threading;
+using System.Collections;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using System.Windows.Interop;
+
+using suExtMainWrapper;
+
+
+namespace suWpfUI
+{
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+
+        public MainWindow(MyExtMainWrapper extMainWrapper, MainWindowWrapper mainWindowWrapper, Dispatcher theSodAccessDispatcher)
+        {
+            this.Closing += MainWindow_Closing;
+            InitializeComponent();
+
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml("<?xml version=\"1.0\" encoding=\"utf-8\" ?>" +
+                        "<People>" +
+                          "<Person FirstName=\"Ringo\" LastName=\"Starr\" Age=\"72\">" +
+                            "<FavoriteColors />" +
+                          "</Person>" +
+                        "</People>");
+
+            XmlDataProvider selection = FindResource("selection") as XmlDataProvider;
+            selection.Document = doc;
+            //dictionary_treeviewer.InvalidateVisual();
+        }
+
+        private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            this.Visibility = Visibility.Hidden;
+        } 
+
+        public void SetDictionaries(XmlDocument xml)
+        {
+            XmlDataProvider selection = FindResource("selection") as XmlDataProvider;
+            selection.Document = xml;
+            //dictionary_treeviewer.InvalidateVisual();
+        }
+    }
+}
