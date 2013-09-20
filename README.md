@@ -3,6 +3,8 @@
 
 ## a SketchUp Ruby extension using WPF(c#)
 
+This is a sample project to show how to build a SketchUp Ruby extension using Wpf for the user interface.
+It thanks to swig ( full name is Simplified Wrapper and Interface Generator ), http://www.swig.org/.
 
 There are three Visual Studio projects, *suWpfExt*, *suWpfUI*, *suExtMainWrapper* and one ruby project *suRubyFiles*. 
 You will get three dlls compiled by Visual Studio:
