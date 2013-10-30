@@ -49,5 +49,10 @@ namespace suWpfUI
             XmlDataProvider selection = FindResource("selection") as XmlDataProvider;
             selection.Document = xml;
         }
+
+        private void Rectangle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

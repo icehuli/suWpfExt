@@ -74,10 +74,12 @@ void MyExtMain::toggle_ext_main_window(){
 
 VALUE MyExtMain::sel_iterfunc(VALUE entity, gcroot<XmlElement^>* sel) {
 
-	rb_funcall(rb_mKernel, rb_intern("puts"), 1, entity);
+	//rb_funcall(rb_mKernel, rb_intern("puts"), 1, entity);
 	VALUE dictionaries = m_attribute_dictionaries(entity);
-	if (dictionaries == Qnil)
+	if (dictionaries == Qnil){
+		//rb_funcall(rb_mKernel, rb_intern("puts"), 1, dictionaries);
 		return entity;
+	}
 	XmlElement^ elem = (*sel)->OwnerDocument->CreateElement(RString2SystemString(m_typename(entity)));
 	(*sel)->AppendChild(elem);
 	std::auto_ptr<gcroot<XmlElement^>> elemPtr(new gcroot<XmlElement^>(elem));
@@ -87,7 +89,7 @@ VALUE MyExtMain::sel_iterfunc(VALUE entity, gcroot<XmlElement^>* sel) {
 }
 
 VALUE MyExtMain::dicts_iterfunc(VALUE dict, gcroot<XmlElement^>* dicts) {
-	rb_funcall(rb_mKernel, rb_intern("puts"), 1, m_name(dict));
+	//rb_funcall(rb_mKernel, rb_intern("puts"), 1, m_name(dict));
 
 	System::String^ dicName = RString2SystemString(m_name(dict));
 	if (dicName == nullptr || dicName == "")
@@ -106,7 +108,7 @@ VALUE MyExtMain::dicts_iterfunc(VALUE dict, gcroot<XmlElement^>* dicts) {
 VALUE MyExtMain::hsh_iterfunc(VALUE pair, gcroot<XmlElement^>* dict) {
 	VALUE key = rb_ary_entry(pair, 0);
 	VALUE value = rb_ary_entry(pair, 1);
-	rb_funcall(rb_mKernel, rb_intern("puts"), 2, key, value);
+	//rb_funcall(rb_mKernel, rb_intern("puts"), 2, key, value);
 
 	//System::String^ keyStr = RVALUE2SystemString(key);
 	//if (keyStr == nullptr || keyStr == "")
@@ -148,7 +150,6 @@ void MyExtMain::update_dictionary_view(VALUE sel)
 
 void MyExtMain::SetMainWindowXmlData()
 {
-
 	gcroot<MainWindowWrapper^>* mainWindowWrapper = (gcroot<MainWindowWrapper^>*)mainWindowWrapperPtr;
 	(*mainWindowWrapper)->SetDictionaries( *(gcroot<XmlDocument^>*)dictsXmlDocPtr );
 }
