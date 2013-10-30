@@ -1,7 +1,9 @@
 ﻿<Window x:Class="suWpfUI.MainWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             Background="Transparent" Title="Dictionaries Viewer" Width="500" Height="500" WindowStyle="None" AllowsTransparency="True">
+             Background="Transparent" Title="Dictionaries Viewer" Width="500" Height="500" WindowStyle="None"
+        MinHeight="80" MinWidth="80"
+        AllowsTransparency="True">
 
     <Window.Resources>
 
@@ -27,6 +29,18 @@
             </Border>
         </DataTemplate>
 
+        <Style  x:Key="resizeBorderRect" TargetType="Rectangle">
+            <Setter Property="Fill" Value="Transparent" />
+            <!--<Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill" Value="#E562AC70"/>
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+
+        <Style  x:Key="windowGrid" TargetType="Grid">
+            <Setter Property="Background" Value="#DDF0F0F0" />
+        </Style>
 
         <HierarchicalDataTemplate x:Key="nodeTemplate">
             <StackPanel Orientation="Vertical" IsEnabled="False"
@@ -61,32 +75,39 @@
         </XmlDataProvider>
 
     </Window.Resources>
-    <Border Background="#99F0F0F0" BorderBrush="Black" BorderThickness="0" CornerRadius="10">
-        <Grid Background="Transparent">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="41*"/>
-                <RowDefinition Height="459*"/>
-            </Grid.RowDefinitions>
-            <Rectangle Grid.Row="0" Height="41" VerticalAlignment="Top" RadiusX="10" RadiusY="10"  Grid.RowSpan="2" MouseDown="Rectangle_MouseDown">
-                <Rectangle.Fill>
-                    <SolidColorBrush Color="#99F0F0F0"/>
-                </Rectangle.Fill>
-            </Rectangle>
-            <Grid Grid.Row="1">
-                <TreeView x:Name="dictionary_treeviewer" Background="Transparent"
-                  Focusable="False"
-                >
-                    <TreeView.Resources>
+    <Grid x:Name="resizeGrid">
+        <Border BorderThickness="5" Margin="-3" BorderBrush="#11F0F0F0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="36"/>
+                    <RowDefinition Height="4"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" MouseDown="ToolBar_MouseDown" Style="{StaticResource windowGrid}">
+                </Grid>
+                <Grid Grid.Row="2" Style="{StaticResource windowGrid}">
+                    <TreeView x:Name="dictionary_treeviewer"
+                  Focusable="False" BorderThickness="0" Background="{x:Null}">
+                        <!--<TreeView.Resources>
                         <SolidColorBrush Color="#F0F0F0" x:Key="{x:Static SystemColors.HighlightBrushKey}"/>
-                    </TreeView.Resources>
-                    <TreeView.ItemContainerStyle>
-                        <Style>
-                            <Setter Property="TreeViewItem.IsExpanded" Value="True"/>
-                        </Style>
-                    </TreeView.ItemContainerStyle>
+                    </TreeView.Resources>-->
+                        <TreeView.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="TreeViewItem.IsExpanded" Value="True"/>
+                            </Style>
+                        </TreeView.ItemContainerStyle>
 
-                </TreeView>
+                    </TreeView>
+                </Grid>
             </Grid>
-        </Grid>
-    </Border>
+        </Border>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Margin="5,0,5,0" Height="5" VerticalAlignment="Top"     x:Name="top"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Margin="5,0,5,0" Height="5" VerticalAlignment="Bottom"  x:Name="bottom"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Margin="0,5,0,5" Width="5"  HorizontalAlignment="Left"  x:Name="left"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Margin="0,5,0,5" Width="5"  HorizontalAlignment="Right" x:Name="right"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Width="5" Height="5" HorizontalAlignment="Left" VerticalAlignment="Bottom" x:Name="bottomLeft"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" x:Name="bottomRight"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Width="5" Height="5" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="topLeft"/>
+        <Rectangle Style="{StaticResource resizeBorderRect}" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Top" x:Name="topRight"/>
+    </Grid>
 </Window>

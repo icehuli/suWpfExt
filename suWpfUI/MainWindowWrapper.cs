@@ -17,7 +17,7 @@ namespace suWpfUI
 {
     public class MainWindowWrapper
     {
-        
+
         private MainWindow mainWpf = null;
         private MyExtMainWrapper extMainWrapper = null;
 
@@ -67,10 +67,10 @@ namespace suWpfUI
 
         public void ShowMainWindow()
         {
-            mainWpf.Dispatcher.BeginInvoke((Action) (() =>
+            mainWpf.Dispatcher.BeginInvoke((Action)(() =>
             {
-              mainWpf.Show();
-              mainWpf.Activate();
+                mainWpf.Show();
+                mainWpf.Activate();
             }), System.Windows.Threading.DispatcherPriority.ContextIdle, null);
         }
 
@@ -84,34 +84,37 @@ namespace suWpfUI
 
         public void ToggleMainWindow()
         {
-          mainWpf.Dispatcher.BeginInvoke((Action)(() =>
-          {
-            if (mainWpf.Visibility == Visibility.Hidden)
+            mainWpf.Dispatcher.BeginInvoke((Action)(() =>
             {
-              mainWpf.Visibility = Visibility.Visible;
-              if (mainWpf.WindowState == WindowState.Minimized)
-              {
-                mainWpf.WindowState = WindowState.Normal;
-              }
-            }
-            else if (mainWpf.Visibility == Visibility.Visible && mainWpf.WindowState != WindowState.Minimized)
-            {
-              mainWpf.Visibility = Visibility.Hidden;
-            }
-            else if (mainWpf.Visibility == Visibility.Visible && mainWpf.WindowState == WindowState.Minimized)
-            {
-              mainWpf.WindowState = WindowState.Normal;
-            }
-            else if (mainWpf.Visibility == Visibility.Collapsed)
-            {
-              mainWpf.Visibility = Visibility.Visible;
-              if (mainWpf.WindowState == WindowState.Minimized)
-              {
-                mainWpf.WindowState = WindowState.Normal;
-              }
-            }
-            //mainWpf.Hide();
-          }), System.Windows.Threading.DispatcherPriority.ContextIdle, null);
+                if (mainWpf.Visibility == Visibility.Hidden)
+                {
+                    mainWpf.Visibility = Visibility.Visible;
+                    if (mainWpf.WindowState == WindowState.Minimized)
+                    {
+                        mainWpf.WindowState = WindowState.Normal;
+                    }
+                    mainWpf.Topmost = true;
+                }
+                else if (mainWpf.Visibility == Visibility.Visible && mainWpf.WindowState != WindowState.Minimized)
+                {
+                    mainWpf.Visibility = Visibility.Hidden;
+                }
+                else if (mainWpf.Visibility == Visibility.Visible && mainWpf.WindowState == WindowState.Minimized)
+                {
+                    mainWpf.WindowState = WindowState.Normal;
+                    mainWpf.Topmost = true;
+                }
+                else if (mainWpf.Visibility == Visibility.Collapsed)
+                {
+                    mainWpf.Visibility = Visibility.Visible;
+                    if (mainWpf.WindowState == WindowState.Minimized)
+                    {
+                        mainWpf.WindowState = WindowState.Normal;
+                    }
+                    mainWpf.Topmost = true;
+                }
+                //mainWpf.Hide();
+            }), System.Windows.Threading.DispatcherPriority.ContextIdle, null);
         }
 
         public void SetDictionaries(XmlDocument xml)
